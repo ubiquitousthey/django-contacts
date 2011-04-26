@@ -152,6 +152,22 @@ class Group(models.Model):
 			'slug': self.slug,
 		})
 
+class Relationship(models.Model):
+    content_type = models.ForeignKey(ContentType,
+		limit_choices_to={'app_label': 'contacts'})
+	object_id = models.IntegerField(db_index=True)
+	content_object = generic.GenericForeignKey()
+	
+	relationship = models.TextField(_('relationship'))
+	
+	to_content_type = models.ForeignKey(ContentType,
+	    limit_choices_to={'app_label': 'contacts'})
+    to_object_id = models.IntegerField(db_index=True)
+    to_content_object = generic.GenericForeignKey()
+	
+	date_added = models.DateTimeField(_('date added'), auto_now_add=True)
+	date_modified = models.DateTimeField(_('date modified'), auto_now=True)
+
 PHONE_LOCATION_CHOICES = (
 	('work', _('Work')),
 	('mobile', _('Mobile')),
