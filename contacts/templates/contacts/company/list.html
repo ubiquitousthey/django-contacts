@@ -1,0 +1,20 @@
+{% extends "contacts/company/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }}: {% trans "Companies" %}{% endblock %}
+
+{% block content_title %}
+	<h2>{% trans "Companies" %}</h2>
+{% endblock %}
+
+{% block content %}
+	<p>
+		<a href="{% url "contacts_company_create" %}">{% trans "Create" %}</a>
+	</p>
+
+	<ul class="link_list">
+	{% for company in object_list %}
+		<li id="company-{{ company.id }}"><a href="{{ company.get_absolute_url }}">{{ company }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

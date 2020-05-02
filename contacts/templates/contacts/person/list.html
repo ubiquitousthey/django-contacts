@@ -1,0 +1,20 @@
+{% extends "contacts/person/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }}: {% trans "People" %}{% endblock %}
+
+{% block content_title %}
+	<h2>{% trans "People" %}</h2>
+{% endblock %}
+
+{% block content %}
+	<p>
+		<a href="{% url "contacts_person_create" %}">{% trans "Create" %}</a>
+	</p>
+
+	<ul class="link_list">
+	{% for person in object_list %}
+		<li id="person-{{ person.id }}"><a href="{{ person.get_absolute_url }}">{{ person }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}
